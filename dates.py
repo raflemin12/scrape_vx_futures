@@ -1,6 +1,9 @@
 import calendar
 
 def third_wed_month(start_year: int, end_year: int) -> list:
+    """
+    Returns the third Wednesday of every month given a range of years
+    """
 
     calendar_obj = calendar.Calendar()
 
@@ -13,5 +16,3 @@ def third_wed_month(start_year: int, end_year: int) -> list:
                           for day in week if day.weekday() == calendar.WEDNESDAY \
                           and day.month == month][2])
     return third_wed
-
-print(third_wed_month(2013, 2025))
