@@ -14,8 +14,12 @@ Project to scrape historical VX futures data from this[link](https://www.cboe.co
 
 ## Step 3
 
-- Clean the dataframes to include only the data we need
+- Store CSV files in a data structure
 
 ## Step 4
+
+- Clean the dataframes to include only the data we need
+
+## Step 5
 
 - Do some analysis?
