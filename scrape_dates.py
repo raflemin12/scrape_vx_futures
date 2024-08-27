@@ -9,4 +9,4 @@ css_id_list = ['2013', '2014', '2015', '2016'
 r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html.parser')
 
-print(soup)
+print(soup.find('h3', {'id':'2013'}).next_sibling.next_sibling)
