@@ -25,4 +25,5 @@ r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html.parser')
 paragraph = soup.find('h3', {'id': '2013'}).find_next('p')
 
-print([date.strip().replace(' ', '-').lower() for date in list(paragraph) if isinstance(date, str)])
+date_strings = [date.strip().replace(' ', '-').lower() 
+                for date in list(paragraph) if isinstance(date, str)]
