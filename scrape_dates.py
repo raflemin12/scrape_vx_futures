@@ -25,5 +25,15 @@ r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html.parser')
 paragraph = soup.find('h3', {'id': '2013'}).find_next('p')
 
-date_strings = [date.strip().replace(' ', '-').lower() 
+date_strings = [date.strip().replace(' ', ',').lower()
                 for date in list(paragraph) if isinstance(date, str)]
+
+for date in date_strings:
+    split_date = date.split(',')
+    split_date[1] = month_to_num[split_date[1]]
+    begin = split_date[0]
+    end = split_date[-1]
+    split_date[0] = end
+    split_date[-1] = begin
+    date = '-'.join(split_date)
+    print(date)
