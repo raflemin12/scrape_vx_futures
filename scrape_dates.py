@@ -23,11 +23,13 @@ month_to_num = {
 }
 r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html.parser')
+# TODO Need to also find 'h2' for years >= current year
 paragraph = soup.find('h3', {'id': '2023'}).find_next('p')
 
 date_strings = [date.strip().lower()
                 for date in list(paragraph) if isinstance(date, str)]
 
+# TODO Break this down into a functions
 for idx, date in enumerate(date_strings):
     split_date = date.split()
     split_date[1] = month_to_num[split_date[1]]
@@ -37,4 +39,5 @@ for idx, date in enumerate(date_strings):
     split_date[-1] = day
     date_strings[idx] = '-'.join(split_date)
 
+# TODO create loop to get all historical dates using css ids
 print(date_strings)
