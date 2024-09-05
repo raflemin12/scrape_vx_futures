@@ -31,9 +31,10 @@ class HistExp:
         '''
         try:
             r = requests.get(self.URL, timeout = 5)
-        except Exception as e:
-            print(e.message, e.args)
-        return BeautifulSoup(r.content, 'html.parser')
+            return BeautifulSoup(r.content, 'html.parser')
+        except BaseException:
+            print('Could not request from website')
+            return None
 
     def get_date_strings(self) -> list:
         """
