@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 URL = 'https://www.macroption.com/vix-expiration-calendar/#history'
 
