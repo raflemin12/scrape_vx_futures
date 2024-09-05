@@ -35,6 +35,12 @@ class HistExp:
             print(e.message, e.args)
         return BeautifulSoup(r.content, 'html.parser')
 
+    def get_date_strings(self) -> list:
+        """
+        Returns date_strings list
+        """
+        return self.date_strings
+
 paragraph = soup.find('h3', {'id': '2023'}).find_next('p')
 
 date_strings = [date.strip().lower()
