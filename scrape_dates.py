@@ -21,7 +21,7 @@ month_to_num = {
     ,'november': '11'
     ,'december': '12'
 }
-r = requests.get(URL)
+r = requests.get(URL, timeout= 5)
 soup = BeautifulSoup(r.content, 'html.parser')
 # TODO Need to also find 'h2' for years >= current year
 paragraph = soup.find('h3', {'id': '2023'}).find_next('p')
