@@ -2,29 +2,39 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 
-URL = 'https://www.macroption.com/vix-expiration-calendar/#history'
+class HistExp:
+    def __init__(self, start_year:int, end_year:int) -> None:
+        self.start_year = start_year
+        self.end_year = end_year
+        self.date_strings = []
+        self.MONTH_TO_NUM = {
+            'january': '01'
+            ,'february': '02'
+            ,'march': '03'
+            ,'april':'04'
+            ,'may': '05'
+            ,'june': '06'
+            ,'july': '07'
+            ,'august': '08'
+            ,'september': '09'
+            ,'october': '10'
+            ,'november': '11'
+            ,'december': '12'
+        }
+        self.css_id_list = [str(year) for year in range(self.start_year, self.end_year + 1)]
+        self.URL = 'https://www.macroption.com/vix-expiration-calendar/#history'
+        self.html = self.get_website
 
-css_id_list = ['2013', '2014', '2015', '2016'
-               '2017', '2018', '2019', '2020'
-               '2021', '2022', '2023', '2024', '2025']
+    def get_website(self):
+        '''
+        Requests html from URL and returns BeautifulSoup object for scraping
+        '''
+        try:
+            r = requests.get(self.URL, timeout = 5)
+        except Exception as e:
+            print(e.message, e.args)
+        return BeautifulSoup(r.content, 'html.parser')
 
-month_to_num = {
-    'january': '01'
-    ,'february': '02'
-    ,'march': '03'
-    ,'april':'04'
-    ,'may': '05'
-    ,'june': '06'
-    ,'july': '07'
-    ,'august': '08'
-    ,'september': '09'
-    ,'october': '10'
-    ,'november': '11'
-    ,'december': '12'
-}
-r = requests.get(URL, timeout= 5)
-soup = BeautifulSoup(r.content, 'html.parser')
-# TODO Need to also find 'h2' for years >= current year
 paragraph = soup.find('h3', {'id': '2023'}).find_next('p')
 
 date_strings = [date.strip().lower()
