@@ -42,12 +42,21 @@ class HistExp:
         """
         return self.date_strings
 
-paragraph = soup.find('h3', {'id': '2023'}).find_next('p')
+    def find_date_p(self, year: str) -> list:
+        """
+        Finds the dates contained within <p> for each css id = year
+        """
+        return list(self.html.find('h3', {'id': year}).find_next('p'))
 
-date_strings = [date.strip().lower()
-                for date in list(paragraph) if isinstance(date, str)]
+    def append_date_strings(self, date_list: list):
+        """
+        Appends dates to date_strings list
+        """
+        for date in date_list:
+            if isinstance(date, str):
+                self.date_strings.append(date.strip().lower())
 
-# TODO Break this down into a functions
+"""
 for idx, date in enumerate(date_strings):
     split_date = date.split()
     split_date[1] = month_to_num[split_date[1]]
@@ -56,6 +65,4 @@ for idx, date in enumerate(date_strings):
     split_date[0] = year
     split_date[-1] = day
     date_strings[idx] = '-'.join(split_date)
-
-# TODO create loop to get all historical dates using css ids
-print(date_strings)
+"""
