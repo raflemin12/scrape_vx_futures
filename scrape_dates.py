@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import datetime
+from datetime import datetime
 
 class HistExp:
     def __init__(self, start_year:int, end_year:int) -> None:
@@ -46,6 +46,8 @@ class HistExp:
         """
         Finds the dates contained within <p> for each css id = year
         """
+        if int(year) >= int(datetime.now().year):
+            return list(self.html.find('h2', {'id': year}).find_next('p'))
         return list(self.html.find('h3', {'id': year}).find_next('p'))
 
     def append_date_strings(self, date_list: list):
