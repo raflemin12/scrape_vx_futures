@@ -70,3 +70,9 @@ class HistExp:
             split_date[0] = year
             split_date[-1] = day
             self.date_strings[idx] = '-'.join(split_date)
+
+    def get_exp_dates(self) -> list:
+        """
+        Conducts whole process of requesting website to correct date format
+        """
+        pass
