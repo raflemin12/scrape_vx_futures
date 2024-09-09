@@ -17,3 +17,13 @@ for date in third_wed_month(2013, 2025):
         print(date)
 
 print(futures_dict)
+
+"""
+def main():
+    get_historical_exp_dates
+    get_csv
+    clean_csv
+    load_to_database(s)
+if __name__ == "__main__":
+    main()
+"""

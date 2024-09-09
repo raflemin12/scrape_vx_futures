@@ -7,7 +7,7 @@ class HistExp:
         self.start_year = start_year
         self.end_year = end_year
         self.date_strings = []
-        self.MONTH_TO_NUM = {
+        self.month_to_num = {
             'january': '01'
             ,'february': '02'
             ,'march': '03'
@@ -58,13 +58,15 @@ class HistExp:
             if isinstance(date, str):
                 self.date_strings.append(date.strip().lower())
 
-"""
-for idx, date in enumerate(date_strings):
-    split_date = date.split()
-    split_date[1] = month_to_num[split_date[1]]
-    day = split_date[0]
-    year = split_date[-1]
-    split_date[0] = year
-    split_date[-1] = day
-    date_strings[idx] = '-'.join(split_date)
-"""
+    def correct_date_format(self) -> None:
+        """
+        Edits the date format to YYYY-MM-DD in date_strings list
+        """
+        for idx, date in enumerate(self.date_strings):
+            split_date = date.split()
+            split_date[1] = self.month_to_num[split_date[1]]
+            day = split_date[0]
+            year = split_date[-1]
+            split_date[0] = year
+            split_date[-1] = day
+            self.date_strings[idx] = '-'.join(split_date)
