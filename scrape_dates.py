@@ -23,7 +23,7 @@ class HistExp:
         }
         self.css_id_list = [str(year) for year in range(self.start_year, self.end_year + 1)]
         self.URL = 'https://www.macroption.com/vix-expiration-calendar/#history'
-        self.html = self.get_website
+        self.html = self.get_website()
 
     def get_website(self):
         '''
@@ -63,16 +63,25 @@ class HistExp:
         Edits the date format to YYYY-MM-DD in date_strings list
         """
         for idx, date in enumerate(self.date_strings):
-            split_date = date.split()
-            split_date[1] = self.month_to_num[split_date[1]]
-            day = split_date[0]
-            year = split_date[-1]
-            split_date[0] = year
-            split_date[-1] = day
-            self.date_strings[idx] = '-'.join(split_date)
+            try: 
+                split_date = date.split()
+                split_date[1] = self.month_to_num[split_date[1]]
+                day = split_date[0]
+                year = split_date[-1]
+                split_date[0] = year
+                split_date[-1] = day
+                self.date_strings[idx] = '-'.join(split_date)
+            except:
+                print(date)
 
     def get_exp_dates(self) -> list:
         """
         Conducts whole process of requesting website to correct date format
         """
-        pass
+        website = self.get_website()
+
+        for year in self.css_id_list:
+            self.append_date_strings(self.find_date_p(year))
+
+        self.correct_date_format()
+        return self.get_date_strings()
