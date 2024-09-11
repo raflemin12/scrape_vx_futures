@@ -78,8 +78,6 @@ class HistExp:
         """
         Conducts whole process of requesting website to correct date format
         """
-        website = self.get_website()
-
         for year in self.css_id_list:
             self.append_date_strings(self.find_date_p(year))
 
