@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 from datetime import datetime
 
@@ -63,7 +64,7 @@ class HistExp:
         Edits the date format to YYYY-MM-DD in date_strings list
         """
         for idx, date in enumerate(self.date_strings):
-            try: 
+            try:
                 split_date = date.split()
                 split_date[1] = self.month_to_num[split_date[1]]
                 day = split_date[0]
