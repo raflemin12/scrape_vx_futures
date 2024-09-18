@@ -24,7 +24,8 @@ print(futures_dict)
 
 def main():
     hist_exp = HistExp(2013, 2025)
-    print(hist_exp.get_exp_dates())
+    exp_dates = hist_exp.get_exp_dates()
+    print(exp_dates)
 
 if __name__ == "__main__":
     main()
