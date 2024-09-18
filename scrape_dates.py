@@ -65,6 +65,7 @@ class HistExp:
         """
         for idx, date in enumerate(self.date_strings):
             try:
+                # using regex.match find date string. eliminating other text
                 split_date = date.split()
                 split_date[1] = self.month_to_num[split_date[1]]
                 day = split_date[0]
