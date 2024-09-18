@@ -57,7 +57,10 @@ class HistExp:
         """
         for date in date_list:
             if isinstance(date, str):
-                self.date_strings.append(date.strip().lower())
+                date_text = date.strip().lower()
+                date_text_match = re.search("^([0-9]+ [A-Za-z]+ [0-9]+)", date_text)
+                if date_text_match:
+                    self.date_strings.append(date_text_match.group())
 
     def swap_year_day(self, date_string: list) -> list:
         """
@@ -82,14 +85,10 @@ class HistExp:
         Edits the date format to YYYY-MM-DD in date_strings list
         """
         for idx, date in enumerate(self.date_strings):
-            try:
-                # using regex.match find date string. eliminating other text
-                split_date = date.split()
-                split_date = self.swap_year_day(split_date)
-                split_date = self.month_to_number(split_date)
-                self.date_strings[idx] = '-'.join(split_date)
-            except:
-                print(date)
+            split_date = date.split()
+            split_date = self.swap_year_day(split_date)
+            split_date = self.month_to_number(split_date)
+            self.date_strings[idx] = '-'.join(split_date)
 
     def get_exp_dates(self) -> list:
         """
