@@ -59,6 +59,24 @@ class HistExp:
             if isinstance(date, str):
                 self.date_strings.append(date.strip().lower())
 
+    def swap_year_day(self, date_string: list) -> list:
+        """
+        Swaps the year and day portions of a date string
+        """
+        day = date_string[0]
+        year = date_string[-1]
+        date_string[0] = year
+        date_string[-1] = day
+        return date_string
+
+    def month_to_number(self, date_string:list) -> list:
+        """
+        Replaces the month name with a corresponding number.
+        Ex: January -> 01
+        """
+        date_string[1] = self.month_to_num[date_string[1]]
+        return date_string
+
     def correct_date_format(self) -> None:
         """
         Edits the date format to YYYY-MM-DD in date_strings list
@@ -67,11 +85,8 @@ class HistExp:
             try:
                 # using regex.match find date string. eliminating other text
                 split_date = date.split()
-                split_date[1] = self.month_to_num[split_date[1]]
-                day = split_date[0]
-                year = split_date[-1]
-                split_date[0] = year
-                split_date[-1] = day
+                split_date = self.swap_year_day(split_date)
+                split_date = self.month_to_number(split_date)
                 self.date_strings[idx] = '-'.join(split_date)
             except:
                 print(date)
