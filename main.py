@@ -23,7 +23,7 @@ print(futures_dict)
 
 
 def main():
-    hist_exp = HistExp(2013, 2025)
+    hist_exp = HistExp(2013, 2026)
     exp_dates = hist_exp.get_exp_dates()
     print(exp_dates)
 
