@@ -3,10 +3,28 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-class HistExp:
-    def __init__(self, start_year:int, end_year:int) -> None:
+class WebHTML:
+    def __init__(self, url) -> None:
+        self.url = url
+        self.html = self.get_website()
+
+    def get_website(self):
+        '''
+        Requests html from URL and returns BeautifulSoup object for scraping
+        '''
+        try:
+            r = requests.get(self.url, timeout = 5)
+            return BeautifulSoup(r.content, 'html.parser')
+        except BaseException:
+            print('Could not request from website')
+            return None
+
+class ExpDates:
+    def __init__(self, start_year:int, end_year:int, html) -> None:
         self.start_year = start_year
         self.end_year = end_year
+        self.css_id_list = [str(year) for year in range(self.start_year, self.end_year + 1)]
+        self.html = html
         self.date_strings = []
         self.month_to_num = {
             'january': '01'
@@ -22,20 +40,6 @@ class HistExp:
             ,'november': '11'
             ,'december': '12'
         }
-        self.css_id_list = [str(year) for year in range(self.start_year, self.end_year + 1)]
-        self.URL = 'https://www.macroption.com/vix-expiration-calendar/#history'
-        self.html = self.get_website()
-
-    def get_website(self):
-        '''
-        Requests html from URL and returns BeautifulSoup object for scraping
-        '''
-        try:
-            r = requests.get(self.URL, timeout = 5)
-            return BeautifulSoup(r.content, 'html.parser')
-        except BaseException:
-            print('Could not request from website')
-            return None
 
     def get_date_strings(self) -> list:
         """
