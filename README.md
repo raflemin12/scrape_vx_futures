@@ -21,7 +21,7 @@ Project to scrape historical VX futures data from this[link](https://www.cboe.co
 
 ## Step 3
 
-- Store CSV files in a data structure
+- Store CSV files in a data structure or GCP
 
 ## Step 4
 
