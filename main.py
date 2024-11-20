@@ -20,6 +20,10 @@ def main():
         except:
             print(date)
     large_df = pd.concat(df_list)
+    future_expiration = list(large_df['Futures'].unique())
+    slice_exp_dates = exp_dates[:len(future_expiration)+1]
+    exp_date_dict = dict(zip(future_expiration, slice_exp_dates))
+    large_df['Futures'].replace(exp_date_dict, inplace=True)
     print(large_df)
 
 if __name__ == "__main__":
