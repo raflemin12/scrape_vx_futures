@@ -24,7 +24,7 @@ def main():
     slice_exp_dates = hist_exp.get_date_strings()[:len(future_expiration)]
     large_df['Futures'] = large_df['Futures'].replace(
         to_replace = future_expiration, value = slice_exp_dates)
-    print(large_df)
+    large_df.to_csv('futures_data.csv')
 
 if __name__ == "__main__":
     main()
