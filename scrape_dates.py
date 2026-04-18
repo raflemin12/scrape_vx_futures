@@ -14,7 +14,7 @@ class WebHTML:
         '''
         try:
             r = requests.get(self.url, timeout = 5)
-            return BeautifulSoup(r.content, 'html.parser')
+            return BeautifulSoup(r.text, 'html.parser')
         except BaseException:
             print('Could not request from website')
             return None
@@ -50,10 +50,20 @@ class ExpDates:
     def find_date_p(self, year: str) -> list:
         """
         Finds the dates contained within <p> for each css id = year
-        """
-        if int(year) >= int(datetime.now().year):
-            return list(self.html.find('h2', {'id': year}).find_next('p'))
-        return list(self.html.find('h3', {'id': year}).find_next('p'))
+        """        
+        header = self.html.find(id=year)
+
+        if header is None:
+            print(f"[WARN] Year {year} not found in HTML")
+            return []
+
+        p_tag = header.find_next('p')
+
+        if p_tag is None:
+            print(f"[WARN] No <p> found after year {year}")
+            return []
+
+        return list(p_tag)
 
     def append_date_strings(self, date_list: list):
         """

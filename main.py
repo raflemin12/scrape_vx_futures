@@ -9,7 +9,7 @@ URL = 'https://cdn.cboe.com/data/us/futures/market_statistics/historical_data/VX
 
 
 def main():
-    expiration_html = WebHTML('https://www.macroption.com/vix-expiration-calendar/#history')
+    expiration_html = WebHTML('https://www.macroption.com/vix-expiration-calendar/')
     hist_exp = ExpDates(2013, 2026, expiration_html.get_website())
     hist_exp.get_exp_dates()
     df_list = []
